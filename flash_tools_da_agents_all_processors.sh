@@ -8,18 +8,30 @@ set -euo pipefail
 # rsddownload-secure.lenovo.com regardless of processor family.
 #
 # CONTENTS BY CATEGORY:
-#  MTK / SP Flash Tool base     — contain DA agent binaries &
-#                                 preloader.bin inside the ZIP
-#  MTK SVC variants             — service mode: DA auth + key
-#  MTK Auth/RSA variants        — DA auth file, cert & RSA key
-#  MTK Parsely (DA signing)     — DA signing tools (all devices)
-#  QCOM QFil base               — contain sla-challenge.dll &
-#                                 Qualcomm prog_* preloaders
-#  QCOM QFil SVC               — service auth + cert inside
-#  QCOM WithDLL                 — explicit DLL bundle (includes
-#                                 sla-challenge.dll)
-#  Unisoc UpgradeDownload/RD   — SPRD upgrade tool (service auth)
-#  Unisoc PAC Tool             — PAC format, cert + key inside
+#
+#  ── MTK / MediaTek (SP Flash Tool & MTK Flash Tool) ──────────────────────
+#  MTK / SP Flash Tool base   — DA agent .bin (DA_PL_NO_CERT_V6.bin,
+#                               DA_SWSEC_*.bin, DA_A*.bin), preloader.bin,
+#                               sla-challenge.dll, certs, auth files & keys
+#                               are ALL bundled INSIDE these tool ZIPs.
+#  MTK SVC variants           — service-mode variants; same DA agent, auth
+#                               key and cert as base but unlocked for SVC use
+#  MTK Auth/RSA variants      — auth-file + RSA certificate + key bundle
+#                               (e.g. SP_Flash_Tool_5.1644_Lacrosse_Auth.zip,
+#                               TN_MTK_TSDC_FlashTool_V5.2316.11_RSA_V9_*.zip)
+#  MTK Parsely (DA signing)   — DA signing / verification tools for MTK
+#
+#  ── Qualcomm (QFil / QcomDLoader) ────────────────────────────────────────
+#  QCOM QFil base             — Qualcomm EDL flash tool; contains prog_*
+#                               preloader MBN files for Qualcomm chipsets
+#  QCOM QFil SVC              — service variant of QFil
+#  QCOM WithDLL               — QcomDLoader bundle that ships with required
+#                               Qualcomm DLLs
+#
+#  ── Unisoc / Spreadtrum ──────────────────────────────────────────────────
+#  Unisoc UpgradeDownload/RD  — SPRD/Unisoc flash tool (UpgradeDownload,
+#                               ResearchDownload) for Unisoc chipsets
+#  Unisoc PAC Tool            — PAC-format upgrade tool for Unisoc chipsets
 # ============================================================
 #
 # CREDENTIALS
@@ -32,7 +44,7 @@ _GUID="${LMSA_GUID:-3adf1304-8a70-4352-b687-8eddcef6b7d1}"
 # ============================================================
 
 # ──────────────────────────────────────────────────────────────────────────────
-# MTK / SP Flash Tool — Base (contains DA agent .bin + preloader.bin)
+# MTK / SP Flash Tool — Base (DA agent .bin, preloader.bin, sla-challenge.dll, certs, auth, keys)
 # ──────────────────────────────────────────────────────────────────────────────
 
 # https://download.lenovo.com/lsa/Resource/Tools/Flash_Tool_TB-8304F.zip
@@ -1278,7 +1290,7 @@ curl -L -o 'flash_tool_v5.20230809.00.001.zip' \
 
 
 # ──────────────────────────────────────────────────────────────────────────────
-# MTK / SP Flash Tool — SVC Variants (service DA auth + key)
+# MTK / SP Flash Tool — SVC Variants (service mode: DA agent + auth key + cert)
 # ──────────────────────────────────────────────────────────────────────────────
 
 # https://download.lenovo.com/lsa/Resource/Tools/MTK_Flash_Tool_Asha_SVC.zip
@@ -1397,7 +1409,7 @@ curl -L -o 'SP_Flash_Tool_exe_Windows_v5.1804_TB3-730_SVC.zip' \
 
 
 # ──────────────────────────────────────────────────────────────────────────────
-# MTK / SP Flash Tool — Auth / RSA Variants (DA auth cert + RSA key)
+# MTK / SP Flash Tool — Auth / RSA Variants (auth file + RSA cert + key bundle)
 # ──────────────────────────────────────────────────────────────────────────────
 
 # https://rsddownload-secure.lenovo.com/SP_Flash_Tool_5.1644_Lacrosse_Auth.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260304T042231Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604800&X-Amz-Credential=AKIAS37TSJMJUUCJCY4T%2F20260304%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=6021bbc90a38a6388f266319653ecf48b8e67dbed9ac0dc206007bfc4c48b171
@@ -1447,7 +1459,7 @@ curl -L -o 'TN_MTK_TSDC_FlashTool_V5.2316.11_RSA_V9_Win10_11.zip' \
 
 
 # ──────────────────────────────────────────────────────────────────────────────
-# MTK Parsely — DA Signing Tool (DA agent for all MTK devices)
+# MTK Parsely — DA Signing / Verification Tool (DA agent signing for all MTK devices)
 # ──────────────────────────────────────────────────────────────────────────────
 
 # https://download.lenovo.com/lsa/Resource/Tools/MTK_V5_ParselyRefresh_V1.zip
@@ -1497,7 +1509,7 @@ curl -L -o 'MTK_V5_Parsely_V1.zip' \
 
 
 # ──────────────────────────────────────────────────────────────────────────────
-# Qualcomm QFil — Base (contains sla-challenge.dll + prog_* preloaders)
+# Qualcomm QFil — Base (Qualcomm EDL flash tool; contains prog_* preloader MBN files)
 # ──────────────────────────────────────────────────────────────────────────────
 
 # https://rsddownload-secure.lenovo.com/QFIL_V2.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260304T042316Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604800&X-Amz-Credential=AKIAS37TSJMJUUCJCY4T%2F20260304%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=5e3642af6747d05ca09fd000a244c81c659c59504ad968fdcce13e4009b48a4b
@@ -1570,7 +1582,7 @@ curl -L -o 'QFil.zip' \
 
 
 # ──────────────────────────────────────────────────────────────────────────────
-# Qualcomm QFil — SVC Variant (service auth + certificate inside)
+# Qualcomm QFil — SVC Variant (service variant of QFil)
 # ──────────────────────────────────────────────────────────────────────────────
 
 # https://rsddownload-secure.lenovo.com/QFil_SVC.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260304T042155Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604800&X-Amz-Credential=AKIAS37TSJMJUUCJCY4T%2F20260304%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=4d8724630e3c468b3b2969508de971fa4520638f5f22e807c48da3d8de53199f
@@ -1597,7 +1609,7 @@ curl -L -o 'QFil_SVC.zip' \
 
 
 # ──────────────────────────────────────────────────────────────────────────────
-# Qualcomm QcomDLoader WithDLL (explicit sla-challenge.dll bundle)
+# Qualcomm QcomDLoader WithDLL (QcomDLoader bundle with required Qualcomm DLLs)
 # ──────────────────────────────────────────────────────────────────────────────
 
 # https://download.lenovo.com/lsa/Resource/Tools/QcomDLoader_V1.3.0.2_WithDLL.zip
@@ -1624,7 +1636,7 @@ curl -L -o 'QcomDLoader_V1.3.0.2_WithDLL.zip' \
 
 
 # ──────────────────────────────────────────────────────────────────────────────
-# Unisoc / Spreadtrum — UpgradeDownload / ResearchDownload (service auth + cert)
+# Unisoc / Spreadtrum — UpgradeDownload / ResearchDownload (SPRD/Unisoc flash tool for Unisoc chipsets)
 # ──────────────────────────────────────────────────────────────────────────────
 
 # https://rsddownload-secure.lenovo.com/RESEARCHDOWNLOAD_R21.0.0001.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260304T041751Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604800&X-Amz-Credential=AKIAS37TSJMJUUCJCY4T%2F20260304%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=febfb803bf7c7b5b707096fd06a6a70ab244c0226a1efe2347568ab6af5915be
@@ -1766,7 +1778,7 @@ curl -L -o 'UpgradeDownload_R25.21.1401_OT20210629_Service.zip' \
 
 
 # ──────────────────────────────────────────────────────────────────────────────
-# Unisoc / Spreadtrum — PAC Tool (PAC format, cert + key inside)
+# Unisoc / Spreadtrum — PAC Tool (PAC-format upgrade tool for Unisoc chipsets)
 # ──────────────────────────────────────────────────────────────────────────────
 
 # https://rsddownload-secure.lenovo.com/PAC_Ironbark.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260304T032502Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604800&X-Amz-Credential=AKIAS37TSJMJUUCJCY4T%2F20260304%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=0ea7fd6c67042f61fad4bc17287fa21d8e34e656b56ad34afe61f300bd6a3860
