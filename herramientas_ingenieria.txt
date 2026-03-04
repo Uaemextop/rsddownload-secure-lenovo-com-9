@@ -1,0 +1,303 @@
+# Herramientas de Ingeniería / Engineering Tools
+# Extraídas de download_links.txt y archivos TCT del repositorio
+# Fuente: https://rsddownload-secure.lenovo.com / https://download.lenovo.com/lsa/
+# Fecha de extracción: 2026-03-04
+#
+# Plataformas cubiertas:
+#   - MTK / MediaTek (SP Flash Tool, MTK Flash Tool)
+#   - Qualcomm (QFIL, QcomDLoader)
+#   - Unisoc / SPRD (UpgradeDownload, RESEARCHDOWNLOAD)
+#   - Unisoc PAC (PAC upgrade tool, PAC Ironbark)
+#   - Lamu / MT6768 (Flash Tool Console LMSA — Moto G05)
+#   - Otras herramientas de servicio
+
+# =============================================================================
+# SECCIÓN 1: MTK / MediaTek — SP Flash Tool (SmartPhone Flash Tool)
+# Herramienta oficial para flashear dispositivos MediaTek via BROM/Preloader
+# Compatible con: MT6768 (Moto G05), MT6765, MT6762, MT6761, MT6737, MT6580, etc.
+# =============================================================================
+
+# --- SP Flash Tool V6 (última versión) ---
+# SP Flash Tool V6 TB373
+https://download.lenovo.com/lsa/Resource/Tools/SP_Flash_Tool_V6_TB373.zip
+
+# SP Flash Tool V6 para XT2055 (Windows)
+https://rsddownload-secure.lenovo.com/SP_Flash_Tool_exe_Windows_v6.20240517_XT2055.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260304T033202Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604800&X-Amz-Credential=AKIAS37TSJMJUUCJCY4T%2F20260304%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=64ef7faeee3a03d6c9daf5c4b528268b6a55ab699487a5c5392ceb47cf52a1f1
+
+# --- SP Flash Tool V5 (versiones recientes) ---
+# SP Flash Tool V5 MSC (20230809)
+https://rsddownload-secure.lenovo.com/SP_Flash_Tool_V5_MSC_20230809.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260304T033230Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604800&X-Amz-Credential=AKIAS37TSJMJUUCJCY4T%2F20260304%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=214ba2ec8bc82e54b7506436cfa3866d6d50de097550402753b07a1fa2825fcd
+
+# flash_tool v5.20230809.00.001
+https://rsddownload-secure.lenovo.com/flash_tool_v5.20230809.00.001.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260304T032142Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604800&X-Amz-Credential=AKIAS37TSJMJUUCJCY4T%2F20260304%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=83948521e48d771bd1cfa819d5f3b53b3703f60c983a549c877110137719611f
+
+# SP Flash Tool V5 OTA15 (20240829)
+https://download.lenovo.com/lsa/Resource/Tools/SP_Flash_Tool_V5_20240829_OTA15.zip
+
+# SP Flash Tool V5.24 TB311
+https://download.lenovo.com/lsa/Resource/Tools/SP_Flash_Tool_V5.24_TB311.zip
+
+# SP Flash Tool V5.24 TB305
+https://download.lenovo.com/lsa/Resource/Tools/SP_Flash_Tool_V5.24_TB305.zip
+
+# SP Flash Tool V5 LTE
+https://download.lenovo.com/lsa/Resource/Tools/SP_Flash_Tool_V5_LTE.zip
+
+# SP Flash Tool V5 Wifi
+https://download.lenovo.com/lsa/Resource/Tools/SP_Flash_Tool_V5_Wifi.zip
+
+# SP Flash Tool V5 TB330 POGOPIN
+https://download.lenovo.com/lsa/Resource/Tools/SP_Flash_Tool_V5_TB330_POGOPIN.zip
+
+# SP Flash Tool V5.1804 PB2-650/670
+https://download.lenovo.com/lsa/Resource/Tools/SP_Flash_Tool_V5.1804_PB2-650_670.zip
+
+# SP Flash Tool V5.1652 TB-7504
+https://download.lenovo.com/lsa/Resource/Tools/SP_Flash_Tool_V5.1652_TB-7504.zip
+
+# SP Flash Tool V2
+https://download.lenovo.com/lsa/Resource/Tools/SP_Flash_Tool_V2.zip
+
+# SP Flash Tool exe Windows v5.1928.01 (190906)
+https://rsddownload-secure.lenovo.com/SP_Flash_Tool_exe_Windows_v5.1928.01_190906.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260304T032100Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604800&X-Amz-Credential=AKIAS37TSJMJUUCJCY4T%2F20260304%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=528a98a80be2a35a738fac9ece437c8f8c8b1dd0e1652a6df0c2cc069160e049
+
+# SP Flash Tool exe Windows v5.1928.01 (191217)
+https://rsddownload-secure.lenovo.com/SP_Flash_Tool_exe_Windows_v5.1928.01_191217.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260304T032100Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604800&X-Amz-Credential=AKIAS37TSJMJUUCJCY4T%2F20260304%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=6688c860c81d0d3b1e363fdba513dd03d0efa92999ac72e1249595e1c52004f0
+
+# SP Flash Tool exe Windows v5.1920.00.001
+https://rsddownload-secure.lenovo.com/SP_Flash_Tool_exe_Windows_v5.1920.00.001.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260304T033117Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604800&X-Amz-Credential=AKIAS37TSJMJUUCJCY4T%2F20260304%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=baa39cd6bfaa805ed0971a89ae27e59d31cbd8ee649668483299197a3bea6677
+
+# SP Flash Tool exe Windows v5.1804 TB3-730
+https://download.lenovo.com/lsa/Resource/Tools/SP_Flash_Tool_exe_Windows_v5.1804_TB3-730.zip
+
+# SP Flash Tool exe Windows v5.1804 TB3-730 SVC
+https://download.lenovo.com/lsa/Resource/Tools/SP_Flash_Tool_exe_Windows_v5.1804_TB3-730_SVC.zip
+
+# SP Flash Tool exe Windows A2016
+https://download.lenovo.com/lsa/Resource/Tools/SP_Flash_Tool_exe_Windows_A2016.zip
+
+# SP Flash Tool exe A1010a20
+https://download.lenovo.com/lsa/Resource/Tools/SP_Flash_Tool_exe_A1010a20.zip
+
+# SP Flash Tool XT1700/XT1706
+https://download.lenovo.com/lsa/Resource/Tools/SP_Flash_Tool_XT1700XT1706.zip
+
+# SP Flash Tool TB-7304F CMB
+https://download.lenovo.com/lsa/Resource/Tools/SP_Flash_Tool_TB-7304F_CMB.zip
+
+# SP Flash Tool TB-7304F NEW
+https://download.lenovo.com/lsa/Resource/Tools/SP_Flash_Tool_TB-7304F_NEW.zip
+
+# SP Flash Tool TB-7304IX
+https://download.lenovo.com/lsa/Resource/Tools/SP_Flash_Tool_TB-7304IX.zip
+
+# SP Flash Tool TB-7304IX SVC
+https://download.lenovo.com/lsa/Resource/Tools/SP_Flash_Tool_TB-7304IX_SVC.zip
+
+# SP Flash Tool TB336
+https://download.lenovo.com/lsa/Resource/Tools/SP_Flash_Tool_TB336.zip
+
+# SP Flash Tool 5.1652 M1
+https://download.lenovo.com/lsa/Resource/Tools/SP_Flash_Tool_5.1652_M1.zip
+
+# SP Flash Tool 5.1652 M2
+https://download.lenovo.com/lsa/Resource/Tools/SP_Flash_Tool_5.1652_M2.zip
+
+# SP Flash Tool 5.1652 TB3-710
+https://download.lenovo.com/lsa/Resource/Tools/SP_Flash_Tool_5.1652_TB3-710.zip
+
+# SP Flash Tool 5.1652 TB3-850
+https://download.lenovo.com/lsa/Resource/Tools/SP_Flash_Tool_5.1652_TB3-850.zip
+
+# SP Flash Tool 5.1644 Lacrosse
+https://download.lenovo.com/lsa/Resource/Tools/SP_Flash_Tool_5.1644_Lacrosse.zip
+
+# SP Flash Tool 5.1644 Lacrosse Auth (con autenticación)
+https://rsddownload-secure.lenovo.com/SP_Flash_Tool_5.1644_Lacrosse_Auth.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260304T042231Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604800&X-Amz-Credential=AKIAS37TSJMJUUCJCY4T%2F20260304%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=6021bbc90a38a6388f266319653ecf48b8e67dbed9ac0dc206007bfc4c48b171
+
+# SP Flash Tool 5.1640 M1
+https://download.lenovo.com/lsa/Resource/Tools/SP_Flash_Tool_5.1640_M1.zip
+
+# SP Flash Tool 5.1628 M3
+https://download.lenovo.com/lsa/Resource/Tools/SP_Flash_Tool_5.1628_M3.zip
+
+# SP Flash Tool 5.1820 M1
+https://download.lenovo.com/lsa/Resource/Tools/SP_Flash_Tool_5.1820_M1.zip
+
+# Smart Phone Flash Tool For After Sale P410 V3 (SP Flash Tool SVC edition)
+https://rsddownload-secure.lenovo.com/Smart_Phone_Flash_Tool_For_After_Sale_P410_V3.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260304T032121Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604800&X-Amz-Credential=AKIAS37TSJMJUUCJCY4T%2F20260304%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=1fb4ce11e686582d0776a0f8867cef06677233c464c8eeddfb68e95d51729d0a
+
+# Flash Tool V5.0.1 Penang
+https://download.lenovo.com/lsa/Resource/Tools/Flash_Tool_V5.0.1_Penang.zip
+
+# Flash Tool TB-8304F
+https://download.lenovo.com/lsa/Resource/Tools/Flash_Tool_TB-8304F.zip
+
+# PokerPlus Flash Tool S1916.V1848.1
+https://download.lenovo.com/lsa/Resource/Tools/PokerPlus_Flash_Tool_S1916.V1848.1.zip
+
+# =============================================================================
+# SECCIÓN 2: MTK / MediaTek — MTK Flash Tool (versiones específicas)
+# Variantes renombradas del SP Flash Tool / herramientas LMSA-branded para MTK
+# =============================================================================
+
+# MTK Flash Tool V6 SVC (versión servicio — recomendada)
+https://download.lenovo.com/lsa/Resource/Tools/MTK_flash_tool_V6_SVC.zip
+
+# MTK Flash Tool V6 (genérica)
+https://download.lenovo.com/lsa/Resource/Tools/MTK_flash_tool_V6.zip
+
+# MTK Flash Tool V6 TB351
+https://download.lenovo.com/lsa/Resource/Tools/MTK_flash_tool_V6_TB351.zip
+
+# MTK Flash Tool v5.2104 P522 (via rsddownload — con firma AWS)
+https://rsddownload-secure.lenovo.com/MTK_Flash_Tool_v5.2104_P522.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260304T033641Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604800&X-Amz-Credential=AKIAS37TSJMJUUCJCY4T%2F20260304%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=e51718a05a9d6ba77a4f26ea14eecdd3bb49cca779860c3dfade1266155db7d4
+
+# MTK Flash Tool v5.2104 TB-J616
+https://download.lenovo.com/lsa/Resource/Tools/MTK_Flash_Tool_v5.2104_TB-J616.zip
+
+# MTK Flash Tool V5.2052 YT-J706
+https://download.lenovo.com/lsa/Resource/Tools/MTK_Flash_Tool_V5.2052_YT-J706.zip
+
+# MTK Flash Tool v5.2052 8506 (TAB)
+https://download.lenovo.com/lsa/Resource/Tools/TAB/MTK_Flash_Tool_v5.2052_8506.zip
+
+# MTK Flash tool V5.2036 (V1)
+https://download.lenovo.com/lsa/Resource/Tools/V1/MTK_Flash_tool_V5.2036.zip
+
+# MTK Flash tool v5.1920.00.001 V1
+https://download.lenovo.com/lsa/Resource/Tools/MTK_Flash_tool_v5.1920.00.001_V1.zip
+
+# MTK Flash tool v5.1920.00.001 V1 update
+https://download.lenovo.com/lsa/Resource/Tools/MTK_Flash_tool_v5.1920.00.001_V1_update.zip
+
+# MTK Flash tool v5.1920.00.001 V2
+https://download.lenovo.com/lsa/Resource/Tools/MTK_Flash_tool_v5.1920.00.001_V2.zip
+
+# MTK Flash Tool v5.1916
+https://download.lenovo.com/lsa/Resource/Tools/MTK_Flash_Tool_v5.1916.zip
+
+# MTK Flashtool v5.1616.00.000
+https://download.lenovo.com/lsa/Resource/Tools/MTK_flashtool_v5.1616.00.000.zip
+
+# MTK SP Flash Tool V5 TB370 V1
+https://download.lenovo.com/lsa/Resource/Tools/MTK_SP_Flash_Tool_V5_TB370_V1.zip
+
+# MTK SP Flash Tool V5 TB370
+https://download.lenovo.com/lsa/Resource/Tools/V1/MTK_SP_Flash_Tool_V5_TB370.zip
+
+# MTK Flash Tool Asha SVC
+https://download.lenovo.com/lsa/Resource/Tools/MTK_Flash_Tool_Asha_SVC.zip
+
+# MTK Flash Tool Asha (TAB)
+https://download.lenovo.com/lsa/Resource/Tools/TAB/MTK_Flash_Tool_Asha.zip
+
+# MTK Flash Tool TB132FU SVC
+https://download.lenovo.com/lsa/Resource/Tools/MTK_Flash_Tool_TB132FU_SVC.zip
+
+# MTK V5 Parsely V1
+https://download.lenovo.com/lsa/Resource/Tools/MTK_V5_Parsely_V1.zip
+
+# MTK V5 ParselyRefresh V1
+https://download.lenovo.com/lsa/Resource/Tools/MTK_V5_ParselyRefresh_V1.zip
+
+# TN MTK TSDC Flash Tool V5.2316.11 RSA V9 Win10/11
+https://rsddownload-secure.lenovo.com/TN_MTK_TSDC_FlashTool_V5.2316.11_RSA_V9_Win10_11.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260304T032122Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604800&X-Amz-Credential=AKIAS37TSJMJUUCJCY4T%2F20260304%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=601f934b5c89c41100cd8a08ba73230a66a4c4e7f23ab8a35ec9c3d3f17a5799
+
+# =============================================================================
+# SECCIÓN 3: MTK — Flash Tool Console LMSA (específico para Moto G05 / Lamu / MT6768)
+# Herramientas de consola personalizadas para la familia Lamu (Moto G05)
+# =============================================================================
+
+# Lamu Flash Tool Console LMSA 5.2404.03 Release1
+# Dispositivo: Moto G05 (lamu) | Chipset: MT6768
+https://rsddownload-secure.lenovo.com/Lamu_Flash_Tool_Console_LMSA_5.2404.03_Release1.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260304T032129Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604800&X-Amz-Credential=AKIAS37TSJMJUUCJCY4T%2F20260304%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=1b7a2954b54067c88316f08d8cee9442453a24cb80dc107c0a27cb81757d0e97
+
+# LamuC Flash Tool Console LMSA 5.2404.03 Release
+# Dispositivo: Moto G05 (lamuc — China) | Chipset: MT6768
+https://rsddownload-secure.lenovo.com/LamuC_FlashTool_Console_LMSA_5.2404.03_release.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260304T032129Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604800&X-Amz-Credential=AKIAS37TSJMJUUCJCY4T%2F20260304%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=80cf27ffcf2b712147f1ad5cab0a5a4f605e542a4ab5875db976cc7322f51332
+
+# LamuLiteGo Flash Tool Console LMSA 5.2404.04 Release
+# Dispositivo: Moto G05 (lamuLiteGo) | Chipset: MT6768
+https://rsddownload-secure.lenovo.com/LamuLiteGo_FlashTool_Console_LMSA_5.2404.04_Release.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260304T032128Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604800&X-Amz-Credential=AKIAS37TSJMJUUCJCY4T%2F20260304%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=a042024ebf21a1cd04485cbbab13c79f6f3e03f7f0f4baf211d566ff2a4014f5
+
+# =============================================================================
+# SECCIÓN 4: Qualcomm — QFIL (Qualcomm Flash Image Loader)
+# Herramienta oficial para flashear dispositivos Qualcomm via EDL/9008
+# Compatible con: Snapdragon 662, 665, 678, 695, 732G, etc.
+# =============================================================================
+
+# QFIL (versión base — download.lenovo.com)
+https://download.lenovo.com/lsa/Resource/Tools/QFil.zip
+
+# QFIL V3 (TAB — tablets)
+https://download.lenovo.com/lsa/Resource/Tools/TAB/QFil-V3.zip
+
+# QFIL SVC (versión servicio — rsddownload)
+https://rsddownload-secure.lenovo.com/QFil_SVC.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260304T042155Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604800&X-Amz-Credential=AKIAS37TSJMJUUCJCY4T%2F20260304%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=4d8724630e3c468b3b2969508de971fa4520638f5f22e807c48da3d8de53199f
+
+# QFIL V2 (versión actualizada — rsddownload)
+https://rsddownload-secure.lenovo.com/QFIL_V2.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260304T042316Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604800&X-Amz-Credential=AKIAS37TSJMJUUCJCY4T%2F20260304%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=5e3642af6747d05ca09fd000a244c81c659c59504ad968fdcce13e4009b48a4b
+
+# YT-X703F firmware via QFIL (paquete con QFIL integrado)
+https://moto-rsd-prod-secure.s3.us-east-1.amazonaws.com/YT-X703F_USR_S120020_2003171754_Q00140_ROW_XX_secure_Qfil.zip
+https://rsddownload-secure.lenovo.com/YT-X703F_USR_S120020_2003171754_Q00140_ROW_XX_secure_Qfil.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260304T032518Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604800&X-Amz-Credential=AKIAS37TSJMJUUCJCY4T%2F20260304%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=ecaf6c5467b6ee44851f4e3c9c7f1b5db38555a6af5d9076bce54249b8e9f474
+
+# QcomDLoader V1.3.0.2 With DLL (Qualcomm Download Tool)
+https://download.lenovo.com/lsa/Resource/Tools/QcomDLoader_V1.3.0.2_WithDLL.zip
+
+# =============================================================================
+# SECCIÓN 5: Unisoc / SPRD — UpgradeDownload
+# Herramienta oficial para flashear dispositivos Unisoc (SPRD)
+# Compatible con: SC9863A, SC9832E, T606, T616, T618, T760, etc.
+# =============================================================================
+
+# UpgradeDownload R25.21.1401 OT20210629 Service
+https://rsddownload-secure.lenovo.com/UpgradeDownload_R25.21.1401_OT20210629_Service.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260304T032135Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604800&X-Amz-Credential=AKIAS37TSJMJUUCJCY4T%2F20260304%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=fd8976fceecf4ac8a6249361f4899917650d2546ee5ef9526e702585d8b23b25
+
+# UpgradeDownload AS R25.20.3901 (201211)
+https://rsddownload-secure.lenovo.com/UpgradeDownload_AS_R25.20.3901_201211.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260304T033118Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604800&X-Amz-Credential=AKIAS37TSJMJUUCJCY4T%2F20260304%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=1b869845609832ba9f5d7d3c239d4923087f7854d23cffaa32a3c18d2dfedd1e
+
+# UpgradeDownload R25.21.1401 (versión 1)
+https://rsddownload-secure.lenovo.com/UpgradeDownload_R25.21.1401_1.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260304T033155Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604800&X-Amz-Credential=AKIAS37TSJMJUUCJCY4T%2F20260304%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=da80cd579d661b36726d93258e78f075621d2fd4023cf5f51d2ca9bec9fe28f3
+
+# UpgradeDownload R25.20.53.10
+https://rsddownload-secure.lenovo.com/UpgradeDownload_R25.20.53.10.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260304T033205Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604800&X-Amz-Credential=AKIAS37TSJMJUUCJCY4T%2F20260304%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=86b9f0d20be464798420946ad4af35518a60482889c6e0bec60ea8397c4f8c17
+
+# UpgradeDownload R25.21.1401 (versión principal)
+https://rsddownload-secure.lenovo.com/UpgradeDownload_R25.21.1401.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260304T033729Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604800&X-Amz-Credential=AKIAS37TSJMJUUCJCY4T%2F20260304%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=efca2a74ad707f2854bb116ac3eb20a22d6393a07d80f88c597053e1342547f0
+
+# RESEARCHDOWNLOAD R21.0.0001 (herramienta de ingeniería Unisoc — modo Research)
+https://rsddownload-secure.lenovo.com/RESEARCHDOWNLOAD_R21.0.0001.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260304T041751Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604800&X-Amz-Credential=AKIAS37TSJMJUUCJCY4T%2F20260304%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=febfb803bf7c7b5b707096fd06a6a70ab244c0226a1efe2347568ab6af5915be
+
+# =============================================================================
+# SECCIÓN 6: Unisoc — PAC Tools (herramienta PAC upgrade para Unisoc)
+# Herramienta para flashear paquetes PAC de dispositivos Unisoc
+# =============================================================================
+
+# PAC upgrade tool V2.17
+https://rsddownload-secure.lenovo.com/PAC_upgrade_tool-V2.17.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260304T042654Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604800&X-Amz-Credential=AKIAS37TSJMJUUCJCY4T%2F20260304%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=8a7ac19279546f896358d5509956c50ce972a26341d44cf673a66015d2656c8b
+
+# PAC Ironbark (paquete PAC + herramienta)
+https://rsddownload-secure.lenovo.com/PAC_Ironbark.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260304T032502Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604800&X-Amz-Credential=AKIAS37TSJMJUUCJCY4T%2F20260304%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=0ea7fd6c67042f61fad4bc17287fa21d8e34e656b56ad34afe61f300bd6a3860
+
+# =============================================================================
+# NOTAS TÉCNICAS
+# =============================================================================
+# Plataformas / Chipsets:
+#   MTK (MediaTek):  MT6768, MT6765, MT6762, MT6761, MT6737T, MT6580, MT6753, etc.
+#   Qualcomm:        SDM632, SDM450, SM6115, SM6150, SM7125, SM8250, etc.
+#   Unisoc (SPRD):   SC9863A, SC9832E, T606, T616, T618, T760, T820, etc.
+#
+# Herramientas por plataforma:
+#   MTK  → SP Flash Tool / MTK Flash Tool / Flash Tool Console LMSA
+#   QCOM → QFIL / QcomDLoader
+#   UNISOC → UpgradeDownload / RESEARCHDOWNLOAD / PAC upgrade tool
+#
+# Modo de conexión:
+#   MTK BROM:    USB VID 0E8D — driver oficial: MediaTek Inc.
+#   QCOM EDL:    USB VID 05C6 PID 9008 — driver: Qualcomm HS-USB QDLoader 9008
+#   Unisoc IDTP: USB VID 1782 — modo IDTP/Calibration
+#
+# NOTA: Las URLs con firma AWS (X-Amz-*) expiran en ~7 días desde la fecha de extracción.
+#       Para acceso permanente, usar las URLs de download.lenovo.com sin firma.
