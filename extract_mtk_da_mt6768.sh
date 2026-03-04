@@ -117,14 +117,14 @@ while IFS=$'\t' read -r url filename; do
     esac
 
     (( total_archives++ )) || true
-    local zip_dest="${ZIP_CACHE}/${filename}"
+    zip_dest="${ZIP_CACHE}/${filename}"
     log "--- [$total_archives] $filename"
 
     download_file "$url" "$zip_dest" || continue
 
     # ── full extraction into per-archive sub-directory ───────────────────────
-    local tool_name="${filename%.zip}"
-    local extract_subdir="${EXTRACT_DIR}/${tool_name}"
+    tool_name="${filename%.zip}"
+    extract_subdir="${EXTRACT_DIR}/${tool_name}"
     mkdir -p "$extract_subdir"
 
     if ! unzip -q -o "$zip_dest" -d "$extract_subdir" 2>>"$LOG"; then
@@ -145,7 +145,7 @@ while IFS=$'\t' read -r url filename; do
     # These files from every flash tool version are included because they may
     # contain MT6768 support internally even when the name does not say so.
     while IFS= read -r -d '' f; do
-        local b; b="$(basename "$f")"
+        b="$(basename "$f")"
         # skip if already captured by the 6768 search above
         [[ "${b,,}" =~ 6768 ]] && continue
         collect_mt6768_file "$f"
