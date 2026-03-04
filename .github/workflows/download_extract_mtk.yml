@@ -1,0 +1,76 @@
+name: Download & Extract MTK Tools (MT6768)
+
+on:
+  workflow_dispatch:     # run manually from the Actions tab
+  push:
+    paths:
+      - 'lmsa_tool_urls.txt'   # re-run whenever the URL list changes
+
+jobs:
+  extract-mtk:
+    name: Download, extract and commit MTK tools
+    runs-on: ubuntu-latest
+    timeout-minutes: 120   # all 60+ archives can take a while
+
+    permissions:
+      contents: write      # needed to push the extracted files back
+
+    steps:
+      # ── 1. check out the repository ─────────────────────────────────────────
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # ── 2. install dependencies ─────────────────────────────────────────────
+      - name: Install dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends curl unzip p7zip-full
+
+      # ── 3. run the extraction script ─────────────────────────────────────────
+      - name: Download and extract all MTK tools
+        run: |
+          chmod +x extract_mtk_da_mt6768.sh
+          ./extract_mtk_da_mt6768.sh lmsa_tool_urls.txt mtk_tools
+
+      # ── 4. remove the raw ZIPs cache (too large to commit) ──────────────────
+      - name: Remove raw ZIP cache
+        run: rm -rf mtk_tools/_zips
+
+      # ── 5. show a quick summary of what was collected ───────────────────────
+      - name: Summary of MT6768 files collected
+        run: |
+          echo "=== Extracted tool directories ==="
+          ls mtk_tools/extracted/ || echo "(none)"
+          echo ""
+          echo "=== MT6768 DA files ==="
+          ls mtk_tools/mt6768/DA/   2>/dev/null || echo "(none found)"
+          echo ""
+          echo "=== MT6768 SVC files ==="
+          ls mtk_tools/mt6768/SVC/  2>/dev/null || echo "(none found)"
+          echo ""
+          echo "=== MT6768 Auth files ==="
+          ls mtk_tools/mt6768/Auth/ 2>/dev/null || echo "(none found)"
+          echo ""
+          echo "=== MT6768 Scatter files ==="
+          ls mtk_tools/mt6768/Scatter/ 2>/dev/null || echo "(none found)"
+          echo ""
+          echo "=== MT6768 Other files ==="
+          ls mtk_tools/mt6768/Other/   2>/dev/null || echo "(none found)"
+
+      # ── 6. commit and push everything back into the repository ──────────────
+      - name: Commit extracted files
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Stage everything under mtk_tools/ (extracted contents + log)
+          git add mtk_tools/
+
+          if git diff --cached --quiet; then
+            echo "Nothing new to commit."
+          else
+            git commit -m "chore: add extracted MTK tools and MT6768 DA/SVC/auth files"
+            git push
+          fi

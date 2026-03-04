@@ -1,157 +1,182 @@
 #!/usr/bin/env bash
 # extract_mtk_da_mt6768.sh
 #
-# Downloads all MTK flash tool archives listed in lmsa_tool_urls.txt and
-# extracts every file that relates to the MT6768 chipset: Download Agent
-# (DA) binaries, scatter files, SVC helpers, auth/cert files, and any
-# other MT6768-tagged artefact.
+# Downloads every MTK / SP_Flash_Tool archive listed in lmsa_tool_urls.txt,
+# fully extracts each one, and additionally collects files relevant to the
+# MT6768 chipset (DA binaries, scatter, SVC, auth/cert, …) into dedicated
+# sub-directories so they are easy to find and commit to the repository.
 #
 # Usage:
 #   ./extract_mtk_da_mt6768.sh [TOOL_URLS_FILE] [OUTPUT_DIR]
 #
 # Defaults:
-#   TOOL_URLS_FILE = lmsa_tool_urls.txt  (tab-separated "URL<TAB>filename")
-#   OUTPUT_DIR     = mtk_tools_mt6768
+#   TOOL_URLS_FILE = lmsa_tool_urls.txt   (tab-separated "URL<TAB>filename")
+#   OUTPUT_DIR     = mtk_tools            (created next to this script)
 #
-# Requirements: bash, curl (or wget), unzip, find
+# Requirements: bash ≥ 4, curl (or wget), unzip, find
 
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 TOOL_URLS_FILE="${1:-${SCRIPT_DIR}/lmsa_tool_urls.txt}"
-OUTPUT_DIR="${2:-${SCRIPT_DIR}/mtk_tools_mt6768}"
+OUTPUT_DIR="${2:-${SCRIPT_DIR}/mtk_tools}"
 
-# ── directories ────────────────────────────────────────────────────────────────
-ZIP_CACHE="${OUTPUT_DIR}/zips"        # downloaded archives
-EXTRACT_DIR="${OUTPUT_DIR}/extracted" # full extractions
-DA_DIR="${OUTPUT_DIR}/DA"             # Download Agent binaries
-SVC_DIR="${OUTPUT_DIR}/SVC"           # service / SVC files
-AUTH_DIR="${OUTPUT_DIR}/Auth"         # auth / cert / RSA files
-SCATTER_DIR="${OUTPUT_DIR}/Scatter"   # scatter/partition map files
-OTHER_DIR="${OUTPUT_DIR}/Other"       # other MT6768-tagged files
+# ── output tree ────────────────────────────────────────────────────────────────
+ZIP_CACHE="${OUTPUT_DIR}/_zips"          # raw downloaded archives (not committed)
+EXTRACT_DIR="${OUTPUT_DIR}/extracted"    # full per-archive extractions
+MT6768_DA="${OUTPUT_DIR}/mt6768/DA"      # Download Agent binaries
+MT6768_SVC="${OUTPUT_DIR}/mt6768/SVC"    # service helper files
+MT6768_AUTH="${OUTPUT_DIR}/mt6768/Auth"  # auth / cert / RSA / key files
+MT6768_SCATTER="${OUTPUT_DIR}/mt6768/Scatter"  # scatter / partition-map files
+MT6768_OTHER="${OUTPUT_DIR}/mt6768/Other"      # other MT6768-tagged artefacts
 
-mkdir -p "$ZIP_CACHE" "$EXTRACT_DIR" "$DA_DIR" "$SVC_DIR" \
-         "$AUTH_DIR" "$SCATTER_DIR" "$OTHER_DIR"
+mkdir -p "$ZIP_CACHE" "$EXTRACT_DIR" \
+         "$MT6768_DA" "$MT6768_SVC" "$MT6768_AUTH" \
+         "$MT6768_SCATTER" "$MT6768_OTHER"
 
-LOG="${OUTPUT_DIR}/extract_mt6768.log"
+LOG="${OUTPUT_DIR}/extract_mtk.log"
 : > "$LOG"
 
-log() { echo "[$(date '+%H:%M:%S')] $*" | tee -a "$LOG"; }
+log()  { echo "[$(date '+%H:%M:%S')] $*" | tee -a "$LOG"; }
+warn() { echo "[$(date '+%H:%M:%S')] WARNING: $*" | tee -a "$LOG" >&2; }
 
-# ── helper: download one file ──────────────────────────────────────────────────
+# ── helper: download one URL to a destination path ────────────────────────────
 download_file() {
     local url="$1" dest="$2"
-    [[ -f "$dest" ]] && { log "  (cached) $(basename "$dest")"; return 0; }
+    if [[ -s "$dest" ]]; then
+        log "  (cached) $(basename "$dest")"
+        return 0
+    fi
     log "  Downloading: $(basename "$dest")"
     if command -v curl &>/dev/null; then
-        curl -fsSL --retry 3 -o "$dest" "$url" 2>>"$LOG" || {
-            log "  WARNING: curl failed for $(basename "$dest"), skipping"
+        curl -fsSL --retry 3 --retry-delay 5 -o "$dest" "$url" 2>>"$LOG" || {
+            warn "curl failed for $(basename "$dest"), skipping"
             rm -f "$dest"; return 1
         }
     elif command -v wget &>/dev/null; then
         wget -q --tries=3 -O "$dest" "$url" 2>>"$LOG" || {
-            log "  WARNING: wget failed for $(basename "$dest"), skipping"
+            warn "wget failed for $(basename "$dest"), skipping"
             rm -f "$dest"; return 1
         }
     else
-        log "ERROR: neither curl nor wget is available"; exit 1
+        echo "ERROR: neither curl nor wget found" >&2; exit 1
     fi
 }
 
-# ── helper: classify and copy an MT6768 file ──────────────────────────────────
-collect_file() {
-    local src="$1" base
-    base="$(basename "$src")"
-    local base_lc="${base,,}"   # lowercase for pattern matching
+# ── helper: classify and copy an MT6768-related file into the right bucket ─────
+collect_mt6768_file() {
+    local src="$1"
+    local base; base="$(basename "$src")"
+    local lc="${base,,}"
 
-    if [[ "$base_lc" =~ da.*\.bin$|allInOne_da|_da\.bin$|download.agent ]]; then
-        cp -n "$src" "$DA_DIR/$base"
-        log "    [DA]      $base"
-    elif [[ "$base_lc" =~ svc|service ]]; then
-        cp -n "$src" "$SVC_DIR/$base"
-        log "    [SVC]     $base"
-    elif [[ "$base_lc" =~ auth|cert|rsa|\.pem$|\.crt$|\.cer$|\.key$ ]]; then
-        cp -n "$src" "$AUTH_DIR/$base"
-        log "    [Auth]    $base"
-    elif [[ "$base_lc" =~ scatter|partition ]]; then
-        cp -n "$src" "$SCATTER_DIR/$base"
-        log "    [Scatter] $base"
+    local dest_dir
+    if   [[ "$lc" =~ da[._-].*\.bin$|allinone_da|_da\.bin$|download.agent|da_swsec ]]; then
+        dest_dir="$MT6768_DA"
+    elif [[ "$lc" =~ svc|service ]]; then
+        dest_dir="$MT6768_SVC"
+    elif [[ "$lc" =~ auth|cert|rsa|\.pem$|\.crt$|\.cer$|\.key$|\.p12$|\.pfx$ ]]; then
+        dest_dir="$MT6768_AUTH"
+    elif [[ "$lc" =~ scatter|partition_table|ptable ]]; then
+        dest_dir="$MT6768_SCATTER"
     else
-        cp -n "$src" "$OTHER_DIR/$base"
-        log "    [Other]   $base"
+        dest_dir="$MT6768_OTHER"
+    fi
+
+    local tag; tag="$(basename "$dest_dir")"
+    if cp -n "$src" "${dest_dir}/${base}" 2>/dev/null; then
+        log "    [${tag}] $base"
+    else
+        log "    [${tag}] $base  (duplicate, skipped)"
     fi
 }
 
 # ── main loop ──────────────────────────────────────────────────────────────────
-log "=== MTK tools download + MT6768 extraction ==="
-log "Tool URL list : $TOOL_URLS_FILE"
-log "Output dir    : $OUTPUT_DIR"
+log "================================================================="
+log " MTK tools: full extraction + MT6768 artefact collection"
+log "================================================================="
+log " URL list  : $TOOL_URLS_FILE"
+log " Output    : $OUTPUT_DIR"
 log ""
 
-total=0; found_mt6768=0
+total_archives=0
+total_extracted=0
+total_mt6768=0
 
 while IFS=$'\t' read -r url filename; do
     # skip blank lines and comment lines
     [[ -z "$url" || "$url" == \#* ]] && continue
 
-    # only process MTK / SP_Flash_Tool archives
+    # ── only process MTK / SP_Flash_Tool archives ────────────────────────────
     case "$filename" in
         MTK_*|SP_Flash_Tool*|flash_tool*|Flash_Tool*|Smart_Phone_Flash_Tool*|\
         TN_MTK_*|LamuLiteGo_FlashTool*|Lamu_Flash_Tool*|LamuC_FlashTool*|\
         MTK_SP_Flash_Tool*|PokerPlus_Flash_Tool*|RESEARCHDOWNLOAD*)
-            : ;;   # keep
+            ;;   # keep and process
         *)
             continue ;;
     esac
 
-    (( total++ )) || true
-    zip_dest="${ZIP_CACHE}/${filename}"
-
-    log "--- $filename"
+    (( total_archives++ )) || true
+    local zip_dest="${ZIP_CACHE}/${filename}"
+    log "--- [$total_archives] $filename"
 
     download_file "$url" "$zip_dest" || continue
 
-    # extract into a per-archive sub-directory
-    extract_subdir="${EXTRACT_DIR}/${filename%.zip}"
+    # ── full extraction into per-archive sub-directory ───────────────────────
+    local tool_name="${filename%.zip}"
+    local extract_subdir="${EXTRACT_DIR}/${tool_name}"
     mkdir -p "$extract_subdir"
 
     if ! unzip -q -o "$zip_dest" -d "$extract_subdir" 2>>"$LOG"; then
-        log "  WARNING: unzip failed for $filename, skipping"
+        warn "unzip failed for $filename, skipping extraction"
         continue
     fi
+    (( total_extracted++ )) || true
+    log "  Extracted to: ${extract_subdir##$SCRIPT_DIR/}"
 
-    # find files that reference MT6768 by name or path
-    while IFS= read -r -d '' match; do
-        (( found_mt6768++ )) || true
-        collect_file "$match"
+    # ── collect files with explicit MT6768 / 6768 in their name ─────────────
+    while IFS= read -r -d '' f; do
+        collect_mt6768_file "$f"
+        (( total_mt6768++ )) || true
     done < <(find "$extract_subdir" -type f \
-        \( -iname "*MT6768*" -o -iname "*6768*" \) -print0)
+                  \( -iname "*MT6768*" -o -iname "*6768*" \) -print0)
 
-    # also look for generic DA/scatter files likely to include MT6768 support
-    while IFS= read -r -d '' da_file; do
-        local_base="$(basename "$da_file")"
-        # avoid duplicating files already collected above
-        [[ "$local_base" =~ 6768 ]] && continue
-        (( found_mt6768++ )) || true
-        collect_file "$da_file"
-    done < <(find "$extract_subdir" -type f \
-        \( -iname "MTK_AllInOne_DA*" \
-           -o -iname "DA_SWSEC*" \
-           -o -iname "Preloader_*" \
-           -o -iname "*_scatter.txt" \
-           -o -iname "*_scatter_emmc.txt" \
-           -o -iname "*auth*" \) -print0)
+    # ── collect generic DA / scatter / auth files (chipset-agnostic names) ───
+    # These files from every flash tool version are included because they may
+    # contain MT6768 support internally even when the name does not say so.
+    while IFS= read -r -d '' f; do
+        local b; b="$(basename "$f")"
+        # skip if already captured by the 6768 search above
+        [[ "${b,,}" =~ 6768 ]] && continue
+        collect_mt6768_file "$f"
+        (( total_mt6768++ )) || true
+    done < <(find "$extract_subdir" -type f \( \
+                  -iname "MTK_AllInOne_DA*.bin"  \
+               -o -iname "DA_SWSEC*.bin"          \
+               -o -iname "Preloader_MT*.bin"       \
+               -o -iname "*_scatter.txt"         \
+               -o -iname "*_scatter_emmc.txt"    \
+               -o -iname "*_scatter_nand.txt"    \
+               -o -iname "auth_sv5.auth"         \
+               -o -iname "*.auth"                \
+               -o -iname "*_SVC*"                \
+               \) -print0)
 
 done < "$TOOL_URLS_FILE"
 
 log ""
-log "=== Summary ==="
-log "MTK tool archives processed : $total"
-log "MT6768-related files found  : $found_mt6768"
-log "Output directories:"
-log "  DA      -> $DA_DIR"
-log "  SVC     -> $SVC_DIR"
-log "  Auth    -> $AUTH_DIR"
-log "  Scatter -> $SCATTER_DIR"
-log "  Other   -> $OTHER_DIR"
-log "Full log  -> $LOG"
+log "================================================================="
+log " Summary"
+log "================================================================="
+log " MTK archives found in list : $total_archives"
+log " Archives successfully unzipped : $total_extracted"
+log " MT6768-related files collected : $total_mt6768"
+log ""
+log " Output tree:"
+log "   Full extractions -> $EXTRACT_DIR"
+log "   MT6768 / DA      -> $MT6768_DA"
+log "   MT6768 / SVC     -> $MT6768_SVC"
+log "   MT6768 / Auth    -> $MT6768_AUTH"
+log "   MT6768 / Scatter -> $MT6768_SCATTER"
+log "   MT6768 / Other   -> $MT6768_OTHER"
+log " Full log            -> $LOG"
